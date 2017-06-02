@@ -1,0 +1,43 @@
+<% provide(:title, @title) %>
+<h1><%= @title %></h1>
+<% if logged_in? && current_page?(questions_user_url(current_user)) %>
+    <a class="new-post-btn" href="#">Create new post</a>
+    <div class="new-post-form">
+        <%= form_for @post do |f| %>
+            <div class="field">
+                <%= f.label :title %>
+                <%= f.text_field :title, class: 'form-control' %>
+
+                <%= f.label :content %>
+                <%= f.text_area :content, class: 'form-control', rows: 15 %>
+            </div>
+            <%= f.submit 'Create post', class: 'btn btn-primary' %>
+        <% end %>
+    </div>
+<% end %>
+
+
+<% if @posts.count > 0 %>
+    <ul class="posts">
+      <% @posts.each do |post| %>
+          <li class="single-post">
+            <a href="<%= post_url post %>" class="post-title"><%= post.title %></a>
+            <p class="post-content"><%= post.content %></p>
+            <div class="post-stats">
+              <a href="<%= user_url(post.user) %>" class="user-created"><%= post.user.name %></a>
+              <span class="date-created">Created <%= time_ago_in_words(post.created_at) %> ago</span>
+              <span class="votes-count">Votes: <%= post.votes %></span>
+              <% if post.answered? && post.answered.count > 0 %>
+                  <span class="answers-count"><%= post.answered.count %></span>
+              <% end %>
+              <% if post.accepted? %>
+              <span class="is-accepted">
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+              </span>
+                  <span class="user-accepted"><%= post.accepted.name %></span>
+              <% end %>
+            </div>
+          </li>
+      <% end %>
+    </ul>
+<% end %>

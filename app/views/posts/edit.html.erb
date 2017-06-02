@@ -1,0 +1,13 @@
+<h1>Update post</h1>
+<div class="update-post-form">
+  <%= form_for @post do |f| %>
+      <div class="field">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: 'form-control', value: @post.title %>
+
+        <%= f.label :content %>
+        <%= f.text_area :content, class: 'form-control', rows: 15, value: @post.content %>
+      </div>
+      <%= f.submit 'Update post', class: 'btn btn-primary' %>
+  <% end %>
+</div>

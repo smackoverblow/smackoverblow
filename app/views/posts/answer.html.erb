@@ -1,0 +1,18 @@
+<h1><%= @title %></h1>
+<% if logged_in? %>
+    <div class="answer-post-form">
+      <%= form_for @answer do |f| %>
+          <div class="field">
+            <%= f.label :title %>
+            <%= f.text_field :title, class: 'form-control' %>
+
+            <%= f.label :content %>
+            <%= f.text_area :content, class: 'form-control', rows: 15 %>
+
+            <%= hidden_field_tag :type, "a" %>
+            <%= hidden_field_tag :answered, @post %>
+          </div>
+          <%= f.submit 'Answer post', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+<% end %>

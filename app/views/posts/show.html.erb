@@ -1,0 +1,28 @@
+<div class="single-post">
+  <p class="post-title"><%= @post.title %></p>
+  <p class="post-content"><%= @post.content %></p>
+  <div class="post-stats">
+    <a href="<%= user_url(@post.user) %>" class="user-created"><%= @post.user.name %></a>
+    <span class="date-created">Created <%= time_ago_in_words(@post.created_at) %> ago</span>
+    <span class="votes-count">Votes: <%= @post.votes %></span>
+    <% if @post.answered? && @post.answered.count > 0 %>
+        <span class="answers-count"><%= @post.answered.count %></span>
+    <% end %>
+    <% if @post.accepted? %>
+              <span class="is-accepted">
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+              </span>
+        <span class="user-accepted"><%= @post.accepted.name %></span>
+    <% end %>
+    <% if current_user?(@post.user) %>
+        <a href="<%= edit_post_url @post %>" class="edit-post">Edit</a>
+        <%= link_to 'delete', @post, method: :delete,
+                    data: {confirm: 'You sure?'} %>
+    <% else %>
+        <%= link_to 'Answer', answer_post_url %>
+    <% end %>
+  </div>
+</div>
+
+<h3 class="text-center">Answers</h3>
+<%= @answers.inspect %>

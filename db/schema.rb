@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170602143624) do
+ActiveRecord::Schema.define(version: 20170608094622) do
 
   create_table "posts", force: :cascade do |t|
     t.text     "title"
     t.text     "content"
     t.integer  "user_id"
-    t.integer  "votes",       default: 0
     t.string   "post_type",   default: "q"
     t.integer  "answered"
     t.datetime "created_at",                null: false
@@ -54,6 +53,14 @@ ActiveRecord::Schema.define(version: 20170602143624) do
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
     t.index ["email"], name: "index_users_on_email", unique: true
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.integer  "voter_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "post_id"
+    t.integer  "vote_type"
   end
 
 end

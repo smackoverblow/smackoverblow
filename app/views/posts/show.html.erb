@@ -4,7 +4,8 @@
   <div class="post-stats">
     <a href="<%= user_url(@post.user) %>" class="user-created"><%= @post.user.name %></a>
     <span class="date-created">Created <%= time_ago_in_words(@post.created_at) %> ago</span>
-    <span class="votes-count">Votes: <%= @post.votes %></span>
+    <span class="votes-count">Votes UP: <%= @post.votes_up.length %></span>
+    <span class="votes-count">Votes DOWN: -<%= @post.votes_down.length %></span>
     <% if @post.answered? && @post.answered.count > 0 %>
         <span class="answers-count"><%= @post.answered.count %></span>
     <% end %>
@@ -20,6 +21,26 @@
                     data: {confirm: 'You sure?'} %>
     <% else %>
         <%= link_to 'Answer', answer_post_url %>
+        <span class="vote-up">
+          <%= form_for Vote.new, remote: true do |f| %>
+                      <div>
+                        <%= hidden_field_tag :post_id, @post.id %>
+                        <%= hidden_field_tag :vote_type, 1 %>
+                        <%= hidden_field_tag :voter_id, current_user.id %>
+                      </div>
+              <%= f.submit 'vote UP', class: 'btn btn-primary', disabled: @post.voted_up?(current_user) %>
+          <% end %>
+        </span>
+        <span class="vote-down">
+          <%= form_for Vote.new, remote: true do |f| %>
+                      <div>
+                        <%= hidden_field_tag :post_id, @post.id %>
+                        <%= hidden_field_tag :vote_type, 0 %>
+                        <%= hidden_field_tag :voter_id, current_user.id %>
+                      </div>
+              <%= f.submit 'vote DOWN', class: 'btn btn-primary', disabled: @post.voted_down?(current_user) %>
+           <% end %>
+        </span>
     <% end %>
   </div>
 </div>

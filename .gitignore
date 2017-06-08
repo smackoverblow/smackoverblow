@@ -72,10 +72,7 @@ bower.json
 /test/tmp/
 /test/version_tmp/
 /tmp/
-<<<<<<< HEAD
 /test/
-=======
->>>>>>> backend
 
 # Used by dotenv library to load environment variables.
 # .env
@@ -115,8 +112,6 @@ build-iPhoneSimulator/
 
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
-<<<<<<< HEAD
-=======
 ### Rails template
 *.rbc
 capybara-*.html
@@ -162,5 +157,4 @@ bower.json
 
 # Ignore Byebug command history file.
 .byebug_history
->>>>>>> backend
 

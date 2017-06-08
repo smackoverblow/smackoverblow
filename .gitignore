@@ -68,6 +68,7 @@ bower.json
 /test/tmp/
 /test/version_tmp/
 /tmp/
+/test/
 
 # Used by dotenv library to load environment variables.
 # .env

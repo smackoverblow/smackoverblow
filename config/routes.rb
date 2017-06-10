@@ -19,8 +19,8 @@ Rails.application.routes.draw do
   get     '/login',     to: 'sessions#new'
   post    '/login',     to: 'sessions#create'
   delete  '/logout',    to: 'sessions#destroy'
-  post    '/vote_up',   to: 'votes#create'
-  post    '/vote_down', to: 'votes#create'
+  # post    '/vote_up',   to: 'votes#create'
+  # post    '/vote_down', to: 'votes#create'
   resources :users do
     member do
       get :following, :followers, :questions
@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   resources :posts do
     member do
       get :answer, :votes
+      patch :accept_answer
     end
   end
 

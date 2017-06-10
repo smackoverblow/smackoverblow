@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170608094622) do
+ActiveRecord::Schema.define(version: 20170609002534) do
 
   create_table "posts", force: :cascade do |t|
     t.text     "title"
@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 20170608094622) do
     t.integer  "answered"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
-    t.integer  "accepted"
     t.integer  "answered_id"
     t.integer  "accepted_id"
     t.index ["accepted_id"], name: "index_posts_on_accepted_id"

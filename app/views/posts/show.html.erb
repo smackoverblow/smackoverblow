@@ -2,18 +2,15 @@
   <p class="post-title"><%= @post.title %></p>
   <p class="post-content"><%= @post.content %></p>
   <div class="post-stats">
-    <a href="<%= user_url(@post.user) %>" class="user-created"><%= @post.user.name %></a>
+    <a href="<%= user_url @post.user %>" class="user-created"><%= @post.user.name %></a>
     <span class="date-created">Created <%= time_ago_in_words(@post.created_at) %> ago</span>
     <span class="votes-count">Votes UP: <%= @post.votes_up.length %></span>
     <span class="votes-count">Votes DOWN: -<%= @post.votes_down.length %></span>
-    <% if @post.answered? && @post.answered.count > 0 %>
+    <% if @post.answers.count > 0 %>
         <span class="answers-count"><%= @post.answered.count %></span>
     <% end %>
-    <% if @post.accepted? %>
-              <span class="is-accepted">
-                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-              </span>
-        <span class="user-accepted"><%= @post.accepted.name %></span>
+    <% if !@post.accepted_answer.nil? %>
+      <span class="is-closed">QUESTION IS CLOSED</span>
     <% end %>
     <% if current_user?(@post.user) %>
         <a href="<%= edit_post_url @post %>" class="edit-post">Edit</a>
@@ -45,5 +42,4 @@
   </div>
 </div>
 
-<h3 class="text-center">Answers</h3>
-<%= @answers.inspect %>
+<%= render 'show_answers', answers: @answers, post: @post %>

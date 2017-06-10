@@ -27,14 +27,13 @@
               <a href="<%= user_url(post.user) %>" class="user-created"><%= post.user.name %></a>
               <span class="date-created">Created <%= time_ago_in_words(post.created_at) %> ago</span>
               <div class="votes"></div>
-              <% if post.answered? && post.answered.count > 0 %>
+              <% if post.answers.count > 0 %>
                   <span class="answers-count"><%= post.answered.count %></span>
               <% end %>
-              <% if post.accepted? %>
-              <span class="is-accepted">
-                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+              <% if !post.accepted_answer.nil? %>
+              <span class="is-closed">
+                <span>QUESTION IS CLOSED</span>
               </span>
-                  <span class="user-accepted"><%= post.accepted.name %></span>
               <% end %>
             </div>
           </li>

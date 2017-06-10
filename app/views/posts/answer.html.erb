@@ -1,16 +1,14 @@
 <h1><%= @title %></h1>
 <% if logged_in? %>
     <div class="answer-post-form">
-      <%= form_for @answer do |f| %>
+      <%= form_for @answer, remote: true do |f| %>
           <div class="field">
-            <%= f.label :title %>
-            <%= f.text_field :title, class: 'form-control' %>
+            <%= f.label :content, 'Write your answer here...' %>
+            <%= f.text_area :content, class: 'form-control', rows: 10 %>
 
-            <%= f.label :content %>
-            <%= f.text_area :content, class: 'form-control', rows: 15 %>
-
-            <%= hidden_field_tag :type, "a" %>
-            <%= hidden_field_tag :answered, @post %>
+            <%= f.hidden_field :post_type, value: 'a' %>
+            <%= f.hidden_field :answered, value: @post.id %>
+            <%= hidden_field_tag :type, 'a' %>
           </div>
           <%= f.submit 'Answer post', class: 'btn btn-primary' %>
       <% end %>

@@ -238,3 +238,9 @@ input {
     border-bottom: 1px solid $gray-lighter;
   }
 }
+
+.post-stats {
+  span, a, p {
+    display: block
+  }
+}

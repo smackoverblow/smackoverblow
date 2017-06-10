@@ -1,0 +1,19 @@
+<h3 class="text-center">Answers</h3>
+<% answers.each do |answer| %>
+    <li class="single-post">
+      <p>ID : <%= answer.id %></p>
+      <p class="post-content"><%= answer.content %></p>
+      <div class="post-stats">
+        <a href="<%= user_url answer.user %>" class="user-created"><%= answer.user.name %></a>
+        <span class="date-created">Answered <%= time_ago_in_words answer.created_at %> ago</span>
+        <div class="votes"></div>
+        <% if @post.accepted_answer == answer %>
+        <span class="is-accepted">
+          <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+        </span>
+        <% elsif @post.user == current_user %>
+          <%= render 'accept_answer_form', post: post, answer: answer %>
+        <% end %>
+      </div>
+    </li>
+<% end %>

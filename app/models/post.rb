@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
   has_many :answers, class_name: 'Post', foreign_key: :answered_id
-  has_many :accepted_answer, class_name: 'Post', foreign_key: :accepted_id
+  has_one :accepted_answer, class_name: 'Post', foreign_key: :accepted_id
   has_many :votes_relationships,  class_name: 'Vote',
                                   foreign_key: :post_id,
                                   dependent: :destroy
@@ -12,10 +12,11 @@ class Post < ApplicationRecord
                           through: :votes_relationships,
                           source: :voter
 
-  default_scope -> { order(created_at: :desc) }
+  default_scope -> { order(accepted_id: :desc, created_at: :asc) }
   validates :user_id, presence: true
-  validates :title, presence: true
+  validates :title, presence: true, length: { minimum: 5, maximum: 255 }, if: -> { post_type == 'q' }
   validates :content, presence: true, length: { minimum: 5 }
+
 
   def delete_vote_up(other_user)
     votes_up.delete(other_user)

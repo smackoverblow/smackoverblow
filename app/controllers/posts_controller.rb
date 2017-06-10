@@ -2,13 +2,13 @@ class PostsController < ApplicationController
   before_action :logged_in_user
 
   def index
-    @posts = Post.all
+    @posts = Post.where(post_type: "q").all
     @title = "All questions"
   end
 
   def show
     @post = Post.find(params[:id])
-    @answers = Post.find_by_answered(params[:id])
+    @answers = Post.where(answered: params[:id]).all
   end
 
   def edit
@@ -22,12 +22,14 @@ class PostsController < ApplicationController
   end
 
   def create
-    post = current_user.posts.build(post_params)
-    if post.valid? && post.save
+    type = params[:type].to_s
+    post = type == 'a' ? current_user.posts.build(answer_params) : current_user.posts.build(post_params)
+    if post.valid?
+      post.save!
       flash[:success] = "New question was created!"
-      redirect_to posts_url
+      # redirect_to posts_url
     else
-      redirect_to user_path current_user
+      # redirect_to user_path current_user
     end
   end
 
@@ -48,9 +50,21 @@ class PostsController < ApplicationController
     redirect_to questions_user_url current_user
   end
 
+  def accept_answer
+    post = Post.find(params[:id])
+    answer = Post.find(params[:answer_id])
+    post.accepted_answer = answer
+    post.save!
+    redirect_to request.referrer
+  end
+
   private
 
     def post_params
       params.require(:post).permit(:title, :content)
+    end
+
+    def answer_params
+      params.require(:post).permit(:content, :post_type, :answered)
     end
 end

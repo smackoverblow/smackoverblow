@@ -14,5 +14,7 @@
 
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>
+    <h1>Question feed</h1>
+    <%= render 'shared/posts', posts: @posts %>
   </div>
 </div>

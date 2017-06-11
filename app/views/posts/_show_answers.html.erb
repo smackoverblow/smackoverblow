@@ -1,6 +1,6 @@
 <h3 class="text-center">Answers</h3>
 <% answers.each do |answer| %>
-    <li class="single-post">
+    <li class="single-post" id="post-<%= answer.id %>">
       <p>ID : <%= answer.id %></p>
       <p class="post-content"><%= answer.content %></p>
       <div class="post-stats">
@@ -13,6 +13,10 @@
         </span>
         <% elsif @post.user == current_user %>
           <%= render 'accept_answer_form', post: post, answer: answer %>
+        <% end %>
+        <% if current_user?(answer.user) %>
+          <%= link_to ' Delete', answer, method: :delete,
+                      data: {confirm: 'You sure?'} %>
         <% end %>
       </div>
     </li>

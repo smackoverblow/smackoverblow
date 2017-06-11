@@ -29,8 +29,7 @@ class PostsController < ApplicationController
     if post.valid?
       post.save!
       flash[:success] = "New question was created!"
-      post = Post.find_by_id(post.answered)
-      redirect_to post
+      redirect_to type == 'a' ? Post.find_by_id(post.answered) : post
     else
       redirect_to user_path current_user
     end

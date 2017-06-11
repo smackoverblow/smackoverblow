@@ -1,0 +1,15 @@
+<div class="container">
+  <ol>
+    <% @users.each do |user| %>
+      <li>
+        <p><%= user.name %></p>
+        <% q = 0 && a = 0 %>
+        <% user.posts.each {|p| p.post_type.to_s == 'q' ? q+=1 : a+=1} %>
+        <p>Total: <%= user.posts.count %></p>
+        <% if !q.zero? %><p>Questions: <%= q %></p><% end %>
+        <% if !a.zero? %><p>Answers: <%= a %></p><% end %>
+
+      </li>
+    <% end %>
+  </ol>
+</div>

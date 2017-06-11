@@ -10,9 +10,11 @@ Rails.application.routes.draw do
   get     '/login',     to: 'sessions#new'
   post    '/login',     to: 'sessions#create'
   delete  '/logout',    to: 'sessions#destroy'
+  get     '/rating_p',    to: 'static_pages#rating'
+  get     '/rating_v',    to: 'static_pages#rating_votes'
   resources :users do
     member do
-      get :following, :followers, :questions
+      get :following, :followers, :questions, :answers
     end
   end
   resources :account_activations, only: [:edit]

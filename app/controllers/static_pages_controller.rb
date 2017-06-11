@@ -17,7 +17,7 @@ class StaticPagesController < ApplicationController
   end
 
   def rating_votes
-    users = User.joins(:posts).group('users.id').where('posts.post_type == ?', 'q')
+    users = User.joins(:posts).group('users.id').where('posts."post_type" = ?', 'q')
     @users = []
     users.each do |user|
       up = 0 & down = 0

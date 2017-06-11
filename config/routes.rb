@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
-  root    'static_pages#home'
-  get 'votes/create'
-  get 'votes/destroy'
-  get 'posts/create'
-  get 'posts/update'
-  get 'posts/destroy'
+  root                      'static_pages#home'
+  get                       'votes/create'
+  get                       'votes/destroy'
+  get                       'posts/create'
+  get                       'posts/update'
+  get                       'posts/destroy'
   get     '/signup',    to: 'users#new'
   post    '/signup',    to: 'users#create'
   get     '/login',     to: 'sessions#new'
   post    '/login',     to: 'sessions#create'
   delete  '/logout',    to: 'sessions#destroy'
-  get     '/rating_p',    to: 'static_pages#rating'
-  get     '/rating_v',    to: 'static_pages#rating_votes'
+  get     '/rating_p',  to: 'static_pages#rating'
+  get     '/rating_v',  to: 'static_pages#rating_votes'
   resources :users do
     member do
       get :following, :followers, :questions, :answers
@@ -28,6 +28,4 @@ Rails.application.routes.draw do
       patch :accept_answer
     end
   end
-
-
 end

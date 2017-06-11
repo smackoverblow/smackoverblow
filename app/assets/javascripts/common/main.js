@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).on('turbolinks:load', function(){
     /**
      * toggle the form considering it's visibility
      * @return slideUp if :visible === true | slideDown if :visible === false

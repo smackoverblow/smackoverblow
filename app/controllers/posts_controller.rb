@@ -8,7 +8,9 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @answers = Post.where(answered: params[:id]).all
+    @answers = Post.unscope(:order)
+                   .where(answered: params[:id])
+                   .order(accepted_id: :desc, created_at: :asc).all
   end
 
   def edit
@@ -27,9 +29,10 @@ class PostsController < ApplicationController
     if post.valid?
       post.save!
       flash[:success] = "New question was created!"
-      # redirect_to posts_url
+      post = Post.find_by_id(post.answered)
+      redirect_to post
     else
-      # redirect_to user_path current_user
+      redirect_to user_path current_user
     end
   end
 
@@ -45,9 +48,10 @@ class PostsController < ApplicationController
 
   def destroy
     @post = current_user.posts.find_by(id: params[:id])
+    type = @post.post_type.to_s
     @post.destroy
     flash[:success] = "Question was destroyed"
-    redirect_to questions_user_url current_user
+    redirect_to type == 'a' ? request.referrer : posts_url
   end
 
   def accept_answer

@@ -2,43 +2,75 @@
   <p class="post-title"><%= @post.title %></p>
   <p class="post-content"><%= @post.content %></p>
   <div class="post-stats">
-    <a href="<%= user_url @post.user %>" class="user-created"><%= @post.user.name %></a>
-    <span class="date-created">Created <%= time_ago_in_words(@post.created_at) %> ago</span>
-    <span class="votes-count">Votes UP: <%= @post.votes_up.length %></span>
-    <span class="votes-count">Votes DOWN: -<%= @post.votes_down.length %></span>
-    <% if @post.answers.count > 0 %>
-        <span class="answers-count"><%= @post.answered.count %></span>
+    <div class="smallgravatar">
+        <span class="date-created">Created <%= time_ago_in_words(@post.created_at) %> ago</span>
+        <a href="<%= user_url @post.user %>" class="user-created"><%= @post.user.name %></a>   
+            <%= link_to gravatar_for(current_user, size: 100), current_user %>
+            <% if @post.answers.count > 0 %>
+                <span class="answers-count"><%= @post.answered.count %></span>
+            <% end %>
+            <br><br>
+            <% if !@post.accepted_answer.nil? %>
+              <span class="is-closed">QUESTION IS CLOSED</span>
+            <% end %>
+    </div>
+            <div>
+              <% if current_user?(@post.user) %>
+                <a href="<%= edit_post_url @post %>" class="edit-post">Edit |</a>
+                <%= link_to ' Delete', @post, method: :delete,
+                            data: {confirm: 'You sure?'} %>
+            <% else %>
+                <%= link_to 'Answer', answer_post_url %>
+              </div>
+
+              
+
+      <!--=====VOTE=====-->
+        <div class="vote">
+          <table>
+           <tr>
+              <td>
+                <span class="vote-up">
+                  <%= form_for Vote.new, remote: true do |f| %>
+                          <div>
+                            <%= hidden_field_tag :post_id, @post.id %>
+                            <%= hidden_field_tag :vote_type, 1 %>
+                            <%= hidden_field_tag :voter_id, current_user.id %>
+                          </div>
+                  <%= f.submit 'vote UP', class: 'btn btn-primary', disabled: @post.voted_up?(current_user) %>
+                  <% end %>
+                </span>
+              </td>
+            </tr>
+          <tr>
+            <td>
+               <span class="votes-count">Votes UP: <%= @post.votes_up.length %></span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+               <span class="votes-count">Votes DOWN: -<%= @post.votes_down.length %></span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="vote-down">
+                <%= form_for Vote.new, remote: true do |f| %>
+                        <div>
+                          <%= hidden_field_tag :post_id, @post.id %>
+                          <%= hidden_field_tag :vote_type, 0 %>
+                          <%= hidden_field_tag :voter_id, current_user.id %>
+                        </div>
+                <%= f.submit 'vote DOWN', class: 'btn btn-primary', disabled: @post.voted_down?(current_user) %>
+                <% end %>
+              </span>
+            </td>
+          </tr>
+        </table>
     <% end %>
-    <% if !@post.accepted_answer.nil? %>
-      <span class="is-closed">QUESTION IS CLOSED</span>
-    <% end %>
-    <% if current_user?(@post.user) %>
-        <a href="<%= edit_post_url @post %>" class="edit-post">Edit</a>
-        <%= link_to 'delete', @post, method: :delete,
-                    data: {confirm: 'You sure?'} %>
-    <% else %>
-        <%= link_to 'Answer', answer_post_url %>
-        <span class="vote-up">
-          <%= form_for Vote.new, remote: true do |f| %>
-                      <div>
-                        <%= hidden_field_tag :post_id, @post.id %>
-                        <%= hidden_field_tag :vote_type, 1 %>
-                        <%= hidden_field_tag :voter_id, current_user.id %>
-                      </div>
-              <%= f.submit 'vote UP', class: 'btn btn-primary', disabled: @post.voted_up?(current_user) %>
-          <% end %>
-        </span>
-        <span class="vote-down">
-          <%= form_for Vote.new, remote: true do |f| %>
-                      <div>
-                        <%= hidden_field_tag :post_id, @post.id %>
-                        <%= hidden_field_tag :vote_type, 0 %>
-                        <%= hidden_field_tag :voter_id, current_user.id %>
-                      </div>
-              <%= f.submit 'vote DOWN', class: 'btn btn-primary', disabled: @post.voted_down?(current_user) %>
-           <% end %>
-        </span>
-    <% end %>
+        </div>
+      <!--===END_VOTE===-->
+
   </div>
 </div>
 

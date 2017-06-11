@@ -1,12 +1,13 @@
 <% provide(:title, "All users") %>
+<br> <br>
+<hr>
 <h1>All users</h1>
-
-<%= will_paginate %>
-
+<hr>
+<%= will_paginate class: 'paginator' %>
 <ul class="users">
   <% @users.each do |user| %>
       <%= render user %>
   <% end %>
 </ul>
 
-<%= will_paginate class: 'hui' %>
+

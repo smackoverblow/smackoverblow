@@ -1,6 +1,10 @@
 <li>
-  <%= gravatar_for user, size: 50 %>
-  <%= link_to user.name, user %>
+  <div class="adiv"><%= gravatar_for user, size: 50%>
+  	<div class="cover-bg"> <div class="cover-title"><%= link_to user.name, user %></div></div>
+   
+
+  </div>
+  
   <% if current_user.admin? && !current_user?(user) %>
     | <%= link_to "delete", user, method: :delete,
                                   data: {confirm: "You sure?"} %>

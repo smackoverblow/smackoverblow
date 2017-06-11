@@ -1,8 +1,7 @@
 <% if posts.count > 0 %>
-
     <ul class="posts">
       <% posts.each do |post| %>
-          <li class="single-post">
+          <li class="single-post" id="post-<%= post.id %>">
             <a href="<%= post_url post %>" class="post-title"><%= post.title %></a>
             <p class="post-content"><%= post.content %></p>
             <div class="post-stats">
@@ -12,6 +11,9 @@
               <a href="<%= user_url(post.user) %>" class="user-created"><%= post.user.name %></a>
                 <%= link_to gravatar_for(current_user, size: 100), current_user %>
               </div>
+              <% if !post.answered.nil? %>
+                <span><%= link_to 'To post >> ', post_url(post.answered) %></span>
+              <% end %>
               <div class="votes"></div>
               <% if post.answers.count > 0 %>
                   <span class="answers-count"><%= post.answered.count %></span>

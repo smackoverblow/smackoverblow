@@ -66,9 +66,18 @@ class UsersController < ApplicationController
   def questions
     @user = User.find(params[:id])
     @title = !!@user == current_user ? 'My questions' : @user.name + "'s questions"
-    @posts = @user.posts.count > 0 ? @user.posts : []
+    questions = Post.where(post_type: 'q', user_id: @user.id)
+    @posts = questions.count > 0 ? questions : []
     @post = Post.new
     render 'posts/index'
+  end
+
+  def answers
+    @user = User.find(params[:id])
+    @title = !!@user == current_user ? 'My answers' : @user.name + "'s answers"
+    answers = Post.where(post_type: 'a', user_id: @user.id)
+    @posts = answers.count > 0 ? answers : []
+    render 'posts/answers'
   end
 
   private

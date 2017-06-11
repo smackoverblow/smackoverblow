@@ -21,7 +21,10 @@ class StaticPagesController < ApplicationController
     @users = []
     users.each do |user|
       up = 0 & down = 0
-      user.posts.each { |p| up += p.votes_up.count && down += p.votes_down.count }
+      user.posts.each do |p|
+        up += p.votes_up.count
+        down += p.votes_down.count
+      end
       @users << {user: user, up: up, down: down, total: up+down}
     end
     @users = @users.sort_by { |obj| [obj[:total], obj[:up], obj[:down], obj[:user].name] }.reverse

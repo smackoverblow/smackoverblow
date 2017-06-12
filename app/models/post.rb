@@ -12,7 +12,7 @@ class Post < ApplicationRecord
                           through: :votes_relationships,
                           source: :voter
 
-  default_scope -> { order(accepted_id: :desc, created_at: :asc) }
+  default_scope -> { order(created_at: :desc) }
   validates :user_id, presence: true
   validates :title, presence: true, length: { minimum: 5, maximum: 255 }, if: -> { post_type == 'q' }
   validates :content, presence: true, length: { minimum: 5 }

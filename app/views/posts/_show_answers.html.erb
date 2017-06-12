@@ -19,6 +19,10 @@
             <% elsif @post.user == current_user %>
               <%= render 'accept_answer_form', post: post, answer: answer %>
             <% end %>
+            <% if current_user?(answer.user) %>
+                <%= link_to ' Delete', answer, method: :delete,
+                            data: {confirm: 'You sure?'} %>
+            <% end %>
           </div>
       </div>
     </li>

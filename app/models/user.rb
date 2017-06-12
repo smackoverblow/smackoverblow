@@ -7,7 +7,7 @@ class User < ApplicationRecord
                                     dependent: :destroy
   has_many :following,  through: :active_relationships,  source: :followed
   has_many :followers,  through: :passive_relationships, source: :follower
-  has_many :posts, dependent: :destroy
+  has_many :posts, dependent: :destroy, counter_cache: true
   attr_accessor :remember_token, :activation_token, :reset_token
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i

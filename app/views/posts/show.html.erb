@@ -23,8 +23,6 @@
                 <%= link_to 'Answer', answer_post_url %>
               </div>
 
-              
-
       <!--=====VOTE=====-->
         <div class="vote">
           <table>
@@ -37,19 +35,19 @@
                             <%= hidden_field_tag :vote_type, 1 %>
                             <%= hidden_field_tag :voter_id, current_user.id %>
                           </div>
-                  <%= f.submit 'vote UP', class: 'btn btn-primary', disabled: @post.voted_up?(current_user) %>
+                  <%= f.submit '.', class: 'btn btn-primary vote-up', disabled: @post.voted_up?(current_user) %>
                   <% end %>
                 </span>
               </td>
             </tr>
           <tr>
-            <td>
-               <span class="votes-count">Votes UP: <%= @post.votes_up.length %></span>
+            <td class="voice-up">
+               <span class="votes-count"><%= @post.votes_up.length %></span>
             </td>
           </tr>
           <tr>
-            <td>
-               <span class="votes-count">Votes DOWN: -<%= @post.votes_down.length %></span>
+            <td class="voice-down">
+               <span class="votes-count">-<%= @post.votes_down.length %></span>
             </td>
           </tr>
           <tr>
@@ -61,7 +59,7 @@
                           <%= hidden_field_tag :vote_type, 0 %>
                           <%= hidden_field_tag :voter_id, current_user.id %>
                         </div>
-                <%= f.submit 'vote DOWN', class: 'btn btn-primary', disabled: @post.voted_down?(current_user) %>
+                <%= f.submit '.', class: 'btn btn-primary vote-down', disabled: @post.voted_down?(current_user) %>
                 <% end %>
               </span>
             </td>
@@ -74,4 +72,6 @@
   </div>
 </div>
 
+<ul class="posts">
 <%= render 'show_answers', answers: @answers, post: @post %>
+</ul>

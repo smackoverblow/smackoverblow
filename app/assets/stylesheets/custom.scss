@@ -10,9 +10,6 @@ $gray-medium-light: #eaeaea;
 p,body,a{
   font-family: "Roboto Slab";
 }
-body{
-  background-color: #fff6eb;
-}
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -33,6 +30,7 @@ body{
 
 body {
   padding-top: 60px;
+  background-color: #e9e9e9;
 }
 
 section {
@@ -80,7 +78,12 @@ p {
 }
 
 /* header */
-
+header.navbar.navbar-fixed-top.navbar-inverse{
+  background-color: #000000;
+  .container{
+    background-color: #000000;
+  }
+}
 #logo {
   float: left;
   margin-right: 10px;
@@ -309,20 +312,6 @@ input[type="text"],
     padding: 0.75em 1em;
   }
 
-  input[type="checkbox"],
-  input[type="radio"] {
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    -ms-appearance: none;
-    appearance: none;
-    display: block;
-    float: left;
-    margin-right: -2em;
-    opacity: 0;
-    width: 1em;
-    z-index: -1;
-  }
-
     input[type="checkbox"] + label,
     input[type="radio"] + label {
       text-decoration: none;
@@ -455,7 +444,7 @@ input {
   width: 100%;
   list-style: none;
   margin: 40px auto;
-  overflow: hidden;
+  overflow: auto;
   li {
     /*padding: 10px 0;*/
     border-bottom: 1px solid $gray-lighter;
@@ -466,45 +455,14 @@ input {
       display: block;
       float: left;
       width: 12.5%;
-      padding: 10px;
+      padding: 20px;
+      /*margin: 15px;*/
+      .adiv.username{
+        margin: 15px;
+      }
+     /* flex-direction: column;*/
     }
-    .adiv:hover .cover-bg,
-    .adiv:hover .cover-title{
-      display: block;
-    }
 
-/* Общие стили для перекрывающих элементов */
-.cover-bg,
-.cover-title {
-  display: none;
-  width: 100px;
-  height: 100px;
-  border-radius: 50px; /* половина ширины и высоты */
-}
-
-/* Перекрывающий фон */
-.cover-bg {
-position: relative;
-  background: #494d4f;
-  -khtml-opacity: .8;
-  -moz-opacity: .8;
-     opacity: .8;
-     padding: 5% 0;
-     margin: 10px;
-}
-
-/* Перекрывающий текст */
-.cover-title {
-position: absolute;
-  font-size: 90%;
-  text-align: center;
-  padding: 5% 0;
-   a {
-      opacity: 1;
-     color: white;
-     font-family: 'Press Start 2P', cursive;
-     }
-}
 
 /* MEDIA QUERIES*/
 @media only screen and (max-width : 1220px),
@@ -602,9 +560,10 @@ ul.posts {
   margin: 0;
   padding: 0;
   li.single-post {
+    list-style: none;
     overflow: auto;
     padding: 10px;
-    background-color: #fff2e0;
+    background-color: #e9e9e9;
     border-radius: 10px;
     margin: 30px auto;
     a.post-title {
@@ -620,8 +579,18 @@ ul.posts {
     div.post-stats span {
       display: block;
     }
-    .smallgravatar{
-      float: right;
+    .date-created, .user-created, .is-closed{
+      font-size: 9pt;
+      line-height: 13pt;
+      color: black;
+  }
+    .answer{
+      border-radius: 10px;
+      background-color: #e4dedf;
+      overflow: auto;
+      float: left;
+      margin: 30px auto;
+      padding: 10px;
       .gravatar{
         float: left;
         margin-right: 5px;
@@ -633,16 +602,13 @@ ul.posts {
         vertical-align: middle;
       }  
     }
-    .date-created, .user-created{
-      font-size: 9pt;
-      line-height: 13pt;
-    }
   }
 }
 
+
 div.single-post {
   padding: 10px;
-  background-color: #fff2e0;
+  background-color: #e9e9e9;
   border-radius: 10px;
   margin: 30px auto;
   overflow: auto;
@@ -662,7 +628,8 @@ div.single-post {
       color: black;
   }
     .smallgravatar{
-      background-color: #ffe3ba;
+      border-radius: 10px;
+      background-color: #e4dedf;
       overflow: auto;
       float: right;
       margin: 30px auto;
@@ -680,11 +647,13 @@ div.single-post {
     }
   .vote{
     float: left;
-    .vote-up{
-
+    .voice-up{
+      background-color: #e3ffcf;
+      text-align: center;
     }
-    .vote-down{
-
+    .voice-down{
+      text-align: center;
+      background-color: #ffcfcf;
     }
   }
 }
@@ -698,6 +667,18 @@ div.single-post {
 
 .container{
   width: 85%;
+  background-color: #e4dedf;
 }
 
-
+.btn.btn-primary.vote-up{
+  background-image: url(thumb-up.png);
+  background-color: #e9e9e9;
+  border-color: #e9e9e9;
+  width: 32px;
+}
+.btn.btn-primary.vote-down{
+  background-image: url(thumb-down.png);
+  background-color: #e9e9e9;
+  border-color: #e9e9e9;
+  width: 32px;
+}

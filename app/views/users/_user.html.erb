@@ -2,11 +2,14 @@
   <div class="adiv">
   	<table>
 	  	<tr><%= gravatar_for user, size: 100%></tr>
-	  	<tr class="username"><td align="center"><%= link_to user.name, user %></td></tr>
-  <% if current_user.admin? && !current_user?(user) %>
-    | <%= link_to "delete", user, method: :delete,
-                                  data: {confirm: "You sure?"} %>
-  <% end %>
+	  	<tr class="username">
+        <td align="center">
+          <%= link_to user.name, user %> 
+          <% if current_user.admin? && !current_user?(user) %>
+            | <%= link_to "x", user, method: :delete, data: {confirm: "You sure?"} %>
+          <% end %>
+        </td>
+      </tr>
   </table>
   </div>
 </li>

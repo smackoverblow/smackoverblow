@@ -6,7 +6,7 @@
       <div class="post-stats">
         ID : <%= answer.id %>
         <p class="post-content"><%= answer.content %></p>
-          <div class="answer">
+          <div class="smallgravatar">
             <span class="date-created">Answered <%= time_ago_in_words answer.created_at %> ago</span>
             <a href="<%= user_url answer.user %>" class="user-created"><%= answer.user.name %></a>
            <%= link_to gravatar_for(current_user, size: 100), current_user %>
@@ -14,7 +14,7 @@
             <div class="votes"></div>
             <% if @post.accepted_answer == answer %>
             <span class="is-accepted">
-              <span class="glyphicon glyphicon-ok" aria-hidden="true">Accept</span>
+              <span class="glyphicon glyphicon-ok" aria-hidden="true">Accepted</span>
             </span>
             <% elsif @post.user == current_user %>
               <%= render 'accept_answer_form', post: post, answer: answer %>

@@ -5,7 +5,7 @@
     <li class="single-post">
       <div class="post-stats">
         ID : <%= answer.id %>
-        <p class="post-content"><%= answer.content %></p>
+        <p class="post-content"><%= raw answer.content %></p>
           <div class="answer">
             <span class="date-created">Answered <%= time_ago_in_words answer.created_at %> ago</span>
             <a href="<%= user_url answer.user %>" class="user-created"><%= answer.user.name %></a>

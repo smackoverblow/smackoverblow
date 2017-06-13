@@ -4,7 +4,7 @@
       <%= form_for @answer do |f| %>
           <div class="field">
             <%= f.label :content, 'Write your answer here...' %>
-            <%= f.text_area :content, class: 'form-control', rows: 10 %>
+            <%= raw f.text_area :content, class: 'tinymce', rows: 10, cols: 100 %>
 
             <%= f.hidden_field :post_type, value: 'a' %>
             <%= f.hidden_field :answered, value: @post.id %>
@@ -14,3 +14,5 @@
       <% end %>
     </div>
 <% end %>
+
+<%= tinymce %>

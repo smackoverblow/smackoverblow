@@ -9,7 +9,7 @@
                 <%= f.text_field :title, class: 'form-control' %>
 
                 <%= f.label :content %>
-                <%= f.text_area :content, class: 'form-control', rows: 15 %>
+                <%= f.text_area :content, class: 'tinymce', rows: 10, cols: 100 %>
             </div>
             <%= f.submit 'Create post', class: 'btn btn-primary' %>
         <% end %>
@@ -17,3 +17,4 @@
 <% end %>
 
 <%= render 'shared/posts', posts: @posts %>
+<%= tinymce %>

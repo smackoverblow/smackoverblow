@@ -6,8 +6,10 @@
         <%= f.text_field :title, class: 'form-control', value: @post.title %>
 
         <%= f.label :content %>
-        <%= f.text_area :content, class: 'form-control', rows: 15, value: @post.content %>
+        <%= f.text_area :content, class: 'tinymce', rows: 10, cols:100, value: @post.content %>
       </div>
       <%= f.submit 'Update post', class: 'btn btn-primary' %>
   <% end %>
 </div>
+
+<%= tinymce %>

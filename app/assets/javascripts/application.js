@@ -16,3 +16,4 @@
 //= require turbolinks
 //= require_tree .
 //= require_tree ./common
+//= require tinymce

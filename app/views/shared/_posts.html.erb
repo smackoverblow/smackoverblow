@@ -8,22 +8,21 @@
               
               <div class="smallgravatar">
                 <span class="date-created">Created <%= time_ago_in_words(post.created_at) %> ago</span>
-              <a href="<%= user_url(post.user) %>" class="user-created"><%= post.user.name %></a>
+                <a href="<%= user_url(post.user) %>" class="user-created"><%= post.user.name %></a>
                 <%= link_to gravatar_for(current_user, size: 100), current_user %>
               </div>
               <% if !post.answered.nil? %>
-                <span><%= link_to 'To post >> ', post_url(post.answered) %></span>
+                <span align="right"><%= link_to 'To post >> ', post_url(post.answered) %></span>
               <% end %>
               <div class="votes"></div>
               <% if post.answers.count > 0 %>
                   <span class="answers-count"><%= post.answered.count %></span>
               <% end %>
               <% if !post.accepted_answer.nil? %>
-              <span class="is-closed">
+              <span class="is-closed" align="right">
                 <span>QUESTION IS CLOSED</span>
               </span>
               <% end %>
-              </div>
             </div>
           </li>
           <hr size="2px" color="#d5d9db">

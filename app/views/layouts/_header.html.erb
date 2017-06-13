@@ -4,34 +4,52 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <% if logged_in? %>
-          <li><%= link_to "Users", users_path %></li>
-          <li class="dropdown">
+            <li class="<%= current_page?(current_user) ? 'active' : '' %>"><%= link_to "Home", current_user %></li>
+            <li><%= link_to "Users", users_path %></li>
+          <li class="dropdown
+          <%= current_page?(posts_url) ||
+              current_page?(questions_user_url(current_user)) ||
+              current_page?(answers_user_url(current_user)) ? 'active' : '' %>">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               Questions <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><%= link_to "All questions", posts_url %></li>
-              <li><%= link_to "My questions", questions_user_url(current_user) %></li>
-              <li><%= link_to "My answers", answers_user_url(current_user) %></li>
+              <li class="<%= current_page?(posts_url) ? 'active' : '' %>">
+                <%= link_to "All questions", posts_url %>
+              </li>
+              <li class="<%= current_page?(questions_user_url(current_user)) ? 'active' : '' %>">
+                <%= link_to "My questions", questions_user_url(current_user) %>
+              </li>
+              <li class="<%= current_page?(answers_user_url(current_user)) ? 'active' : '' %>">
+                <%= link_to "My answers", answers_user_url(current_user) %>
+              </li>
             </ul>
           </li>
-          <li class="dropdown">
+          <li class="dropdown <%= current_page?(rating_v_url) || current_page?(rating_p_url) ? 'active' : '' %>">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               Rating <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><%= link_to "Posts rating", rating_p_url %></li>
-              <li><%= link_to "Votes rating", rating_v_url %></li>
+              <li class="<%= current_page?(rating_p_url) ? 'active' : '' %>">
+                <%= link_to "Posts rating", rating_p_url %>
+              </li>
+              <li class="<%= current_page?(rating_v_url) ? 'active' : '' %>">
+                <%= link_to "Votes rating", rating_v_url %>
+              </li>
             </ul>
           </li>
-          <li class="dropdown">
+          <li class="dropdown <%= current_page?(current_user) || edit_user_path(current_user) ? 'active' : '' %>">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               Account <b class="caret"></b>
             </a>
 
             <ul class="dropdown-menu">
-              <li><%= link_to "Profile", current_user %></li>
-              <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+              <li class="<%= current_page?(current_user) ? 'active' : '' %>">
+                <%= link_to "Profile", current_user %>
+              </li>
+              <li class="<%= current_page?(edit_user_path(current_user)) ? 'active' : '' %>">
+                <%= link_to "Settings", edit_user_path(current_user) %>
+              </li>
               <li class="divider"></li>
               <li>
                 <%= link_to "Log out", logout_path, method: 'delete' %>

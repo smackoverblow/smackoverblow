@@ -48,6 +48,7 @@ class PostsController < ApplicationController
   def destroy
     @post = current_user.posts.find_by(id: params[:id])
     type = @post.post_type.to_s
+    Post.where({answered: @post.id}).destroy_all unless type == 'a'
     @post.destroy
     flash[:success] = "Question was destroyed"
     redirect_to type == 'a' ? request.referrer : posts_url

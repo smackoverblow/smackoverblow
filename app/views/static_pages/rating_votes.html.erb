@@ -2,13 +2,15 @@
   <% if @users.empty? %>
   <div class="alert alert-warning text-center">No votes yet</div>
   <% else %>
-  <ol>
+  <ol class="rating">
     <% @users.each do |user| %>
-        <li>
-          <p><%= user[:user].name %></p>
-          <span>Total: <%= user[:total] %></span>
-          <span><%= user[:up].zero? ? '' : "Votes UP: #{user[:up]}" %></span>
-          <span><%= user[:down].zero? ? '' : "Votes DOWN: #{user[:down]}" %></span>
+        <li class="info-user">
+            <a href="<%= user[:user].name %>"><%= user[:user].name %></a>
+                <%= link_to gravatar_for(current_user, size: 100), current_user %><br><br>
+                <span>Total: <%= user[:total] %> |
+          <%= user[:up].zero? ? '' : " Votes UP: #{user[:up]} |" %>
+          <%= user[:down].zero? ? '' : " Votes DOWN: #{user[:down]}" %></span>
+          <hr>
         </li>
     <% end %>
   </ol>

@@ -1,14 +1,15 @@
 <div class="container">
-  <ol>
+  <ol class="rating">
     <% @users.each do |user| %>
-      <li>
-        <p><%= user.name %></p>
+      <li class="info-user">
+                <a href="<%= user.name %>"><%= user.name %></a>
+                <%= link_to gravatar_for(current_user, size: 100), current_user %><br><br>
         <% q = 0 && a = 0 %>
         <% user.posts.each {|p| p.post_type.to_s == 'q' ? q+=1 : a+=1} %>
-        <p>Total: <%= user.posts.count %></p>
-        <% if !q.zero? %><p>Questions: <%= q %></p><% end %>
-        <% if !a.zero? %><p>Answers: <%= a %></p><% end %>
-
+        <p>Total: <%= user.posts.count %> |
+        <% if !q.zero? %> Questions: <%= q %> |<% end %>
+        <% if !a.zero? %> Answers: <%= a %><% end %>
+        <hr>
       </li>
     <% end %>
   </ol>

@@ -10,7 +10,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @answers = Post.unscope(:order)
                    .where(answered: params[:id])
-                   .order(accepted_id: :desc, created_at: :asc).all
+                   .order(accepted_id: :asc, created_at: :asc).all.reverse
   end
 
   def edit

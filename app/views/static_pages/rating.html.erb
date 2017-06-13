@@ -2,8 +2,8 @@
   <ol class="rating">
     <% @users.each do |user| %>
       <li class="info-user">
-                <a href="<%= user.name %>"><%= user.name %></a>
-                <%= link_to gravatar_for(current_user, size: 100), current_user %><br><br>
+                <a href="<%= user_url user %>"><%= user.name %></a>
+                <%= link_to gravatar_for(current_user, size: 100), user %><br><br>
         <% q = 0 && a = 0 %>
         <% user.posts.each {|p| p.post_type.to_s == 'q' ? q+=1 : a+=1} %>
         <p>Total: <%= user.posts.count %> |

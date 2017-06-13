@@ -5,8 +5,8 @@
   <ol class="rating">
     <% @users.each do |user| %>
         <li class="info-user">
-            <a href="<%= user[:user].name %>"><%= user[:user].name %></a>
-                <%= link_to gravatar_for(current_user, size: 100), current_user %><br><br>
+            <a href="<%= user_url user[:user] %>"><%= user[:user].name %></a>
+                <%= link_to gravatar_for(user[:user], size: 100), user[:user] %><br><br>
                 <span>Total: <%= user[:total] %> |
           <%= user[:up].zero? ? '' : " Votes UP: #{user[:up]} |" %>
           <%= user[:down].zero? ? '' : " Votes DOWN: #{user[:down]}" %></span>
